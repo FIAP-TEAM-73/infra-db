@@ -7,7 +7,7 @@ terraform {
     organization = "FIAP-TEAM-73"
 
     workspaces {
-      name = "infra-db"
+      name = "terraform-infra-db"
     }
   }
 
