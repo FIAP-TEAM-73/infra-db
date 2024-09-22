@@ -43,14 +43,10 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
+        env:
+          PLAN: ${{ steps.plan.outputs.stdout }}
         run: terraform plan -no-color -input=false
         continue-on-error: true
-        
-      - name: Terraform Plan Output
-        uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.0.0
-        id: plan-output
-        with:
-          plan: ${{ fromJSON(steps.plan.outputs.payload).data.relationships.plan.data.id }}
 
       - name: Update Pull Request
         uses: actions/github-script@v6
@@ -67,12 +63,20 @@ jobs:
                   const botComment = comments.find(comment => {
                     return comment.user.type === 'Bot' && comment.body.includes('HCP Terraform Plan Output')
                   });
-                  const output = `#### HCP Terraform Plan Output
-                      \`\`\`
-                      Plan: ${{ steps.plan-output.outputs.add }} to add, ${{ steps.plan-output.outputs.change }} to change, ${{ steps.plan-output.outputs.destroy }} to destroy.
-                      \`\`\`
-                      [HCP Terraform Plan](${{ steps.plan.outputs.run_link }})
-                      `;
+                  cconst output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+                  #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+                  #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+                  #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+
+                  <details><summary>Show Plan</summary>
+
+                  \`\`\`terraform\n
+                  ${process.env.PLAN}
+                  \`\`\`
+
+                  </details>
+
+                  *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
                   // 3. Delete previous comment so PR timeline makes sense
                   if (botComment) {
                     github.rest.issues.deleteComment({
