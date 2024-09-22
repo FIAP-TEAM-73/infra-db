@@ -28,16 +28,16 @@ resource "aws_instance" "ubuntu" {
 }
 
 resource "aws_db_instance" "postgres-db-instance" {
-    allocated_storage    = 20
-    engine               = "postgres"
-    engine_version       = "16"
-    identifier           = "postgres-db-instance"
-    instance_class       = "db.t4g.micro"
-    password             = aws_secretsmanager_secret_version.db_password.secret_string
-    skip_final_snapshot  = true
-    storage_encrypted    = false
-    publicly_accessible  = true
-    username             = aws_secretsmanager_secret_version.db_user.secret_string
-    apply_immediately = true
-    db_name = "database_fastfood"
-  }
+  allocated_storage   = 20
+  engine              = "postgres"
+  engine_version      = "16"
+  identifier          = "postgres-db-instance"
+  instance_class      = "db.t4g.micro"
+  password            = aws_secretsmanager_secret_version.db_password.secret_string
+  skip_final_snapshot = true
+  storage_encrypted   = false
+  publicly_accessible = true
+  username            = aws_secretsmanager_secret_version.db_user.secret_string
+  apply_immediately   = true
+  db_name             = "database_fastfood"
+}
