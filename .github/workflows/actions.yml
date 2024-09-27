@@ -92,10 +92,11 @@ jobs:
                     body: output
                   });
 
-      - name: Terraform Plan Status
+      - name: Terraform Reject on Failure
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
       - name: Terraform Apply
-        if: (github.ref == 'refs/heads/main' || github.head_ref == 'FEATURE/*') && github.event_name == 'pull_request'
+        if: steps.plan.outcome == 'success'
+        #if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/RELEASE/*') && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
