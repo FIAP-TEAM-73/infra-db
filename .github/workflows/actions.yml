@@ -97,5 +97,5 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/FEATURE/*') && github.event_name == 'pull_request'
+        if: (github.ref == 'refs/heads/main' || github.head_ref == 'FEATURE/*') && github.event_name == 'pull_request'
         run: terraform apply -auto-approve -input=false
