@@ -1,10 +1,11 @@
 name: "Terraform"
-
+run-name: Deployment for Terraform Database Infrastructure to AWS provider on branch ${{ github.ref_name }} by @${{ github.actor }}
 on:
   push:
     branches:
       - main
       - RELEASE/*
+      - FEATURE/*
   pull_request:
 
 env:
@@ -61,7 +62,7 @@ jobs:
                     issue_number: context.issue.number,
                   });
                   const botComment = comments.find(comment => {
-                    return comment.user.type === 'Bot' && comment.body.includes('HCP Terraform Plan Output')
+                    return comment.user.type === 'Bot' && comment.body.includes('Terraform Format and Style')
                   });
                   const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
                   #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
@@ -97,5 +98,5 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/RELEASE/*') && github.event_name == 'push'
+        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/FEATURE/*') && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
