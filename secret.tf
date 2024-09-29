@@ -25,7 +25,7 @@ resource "aws_secretsmanager_secret" "db_url" {
 
 resource "aws_secretsmanager_secret_version" "db_url" {
   secret_id     = aws_secretsmanager_secret.db_url.id
-  secret_string = aws_db_instance.postgres-db-instance.address
+  secret_string = "postgres://${aws_secretsmanager_secret_version.db_user.secret_string}:${aws_secretsmanager_secret_version.db_password.secret_string}@${aws_secretsmanager_secret_version.db_host.secret_string}:5432/database_fastfood"
 }
 
 resource "aws_secretsmanager_secret" "db_host" {
@@ -35,5 +35,5 @@ resource "aws_secretsmanager_secret" "db_host" {
 
 resource "aws_secretsmanager_secret_version" "db_host" {
   secret_id     = aws_secretsmanager_secret.db_host.id
-  secret_string = "postgres://${aws_secretsmanager_secret_version.db_user.secret_string}:${aws_secretsmanager_secret_version.db_password.secret_string}@${aws_secretsmanager_secret_version.db_url.secret_string}:5432/database_fastfood"
+  secret_string = aws_db_instance.postgres-db-instance.address
 }
