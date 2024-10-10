@@ -4,7 +4,7 @@ data "aws_iam_policy_document" "default_policy" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::245903023069:role/voclabs"]
+      identifiers = ["arn:aws:iam::${var.account_id}:role/voclabs"]
     }
 
     actions   = ["secretsmanager:GetSecretValue"]
