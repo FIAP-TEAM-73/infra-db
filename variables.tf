@@ -24,4 +24,8 @@ variable "instance_name" {
   default     = "Provisioned by Terraform"
 }
 
+variable "account_id" {
+  type        = string
+  description = "AWS Academy account id"
+}
 
