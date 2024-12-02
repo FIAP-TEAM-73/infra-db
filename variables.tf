@@ -7,11 +7,27 @@ variable "region" {
 }
 
 variable "rds_postgre_user" {
-  description = "RDS PostgreSQL user"
+  description = "RDS PostgreSQL user for Backoffice APP"
 }
 
 variable "rds_postgre_password" {
-  description = "RDS PostgreSQL password"
+  description = "RDS PostgreSQL password Backoffice APP"
+}
+
+variable "rds_postgre_payment_api_user" {
+  description = "RDS PostgreSQL user for Payment API"
+}
+
+variable "rds_postgre_payment_api_password" {
+  description = "RDS PostgreSQL password for Payment API"
+}
+
+variable "mongo_db_order_api_user" {
+  description = "RDS PostgreSQL user for Order API"
+}
+
+variable "mongo_db_order_api_password" {
+  description = "RDS PostgreSQL password for Order API"
 }
 
 variable "instance_type" {
