@@ -31,3 +31,33 @@ resource "aws_secretsmanager_secret_policy" "db_url_policy" {
   secret_arn = aws_secretsmanager_secret.db_url.arn
   policy     = data.aws_iam_policy_document.default_policy.json
 }
+
+resource "aws_secretsmanager_secret_policy" "db_payment_api_user_policy" {
+  secret_arn = aws_secretsmanager_secret.db_payment_api_user.arn
+  policy     = data.aws_iam_policy_document.default_policy.json
+}
+
+resource "aws_secretsmanager_secret_policy" "db_payment_api_password_policy" {
+  secret_arn = aws_secretsmanager_secret.db_payment_api_password.arn
+  policy     = data.aws_iam_policy_document.default_policy.json
+}
+
+resource "aws_secretsmanager_secret_policy" "db_payment_api_host_policy" {
+  secret_arn = aws_secretsmanager_secret.db_payment_api_host.arn
+  policy     = data.aws_iam_policy_document.default_policy.json
+}
+
+resource "aws_secretsmanager_secret_policy" "db_payment_api_url_policy" {
+  secret_arn = aws_secretsmanager_secret.db_payment_api_url.arn
+  policy     = data.aws_iam_policy_document.default_policy.json
+}
+
+resource "aws_secretsmanager_secret_policy" "db_order_api_user_policy" {
+  secret_arn = aws_secretsmanager_secret.db_order_api_user.arn
+  policy     = data.aws_iam_policy_document.default_policy.json
+}
+
+resource "aws_secretsmanager_secret_policy" "db_order_api_password_policy" {
+  secret_arn = aws_secretsmanager_secret.db_order_api_password.arn
+  policy     = data.aws_iam_policy_document.default_policy.json
+}
